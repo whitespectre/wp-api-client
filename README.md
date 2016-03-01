@@ -121,7 +121,7 @@ next_page = @api.get(posts.next_page)
 
 #### `WpApiClient::Entities::BaseEntity`
 
-Base class for `Post`, `Term` and `Taxonomy`, so far. Not all methods are implemented.
+Base class for `Post`, `Term`, `Image` and `Taxonomy`, so far. Not all methods are implemented.
 
 ## Other
 

@@ -2,6 +2,7 @@ module WpApiClient
   class Client
 
     Types = [
+      WpApiClient::Entities::Image,
       WpApiClient::Entities::Post,
       WpApiClient::Entities::Term,
       WpApiClient::Entities::Taxonomy
