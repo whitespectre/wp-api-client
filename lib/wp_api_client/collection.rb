@@ -4,10 +4,12 @@ module WpApiClient
 
     attr_accessor :resources, :total_available
 
-    def initialize(resources, headers)
-      @resources = resources
-      @links = parse_link_header(headers['Link'])
-      @total_available = headers['X-WP-TOTAL'].to_i
+    def initialize(resources, headers = nil)
+      @resources = resources.map { |object| WpApiClient::Entities::Base.build(object, self) }
+      if headers
+        @links = parse_link_header(headers['Link'])
+        @total_available = headers['X-WP-TOTAL'].to_i
+      end
     end
 
     def each(&block)

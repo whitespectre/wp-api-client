@@ -1,6 +1,6 @@
 module WpApiClient
   module Entities
-    class Post < BaseEntity
+    class Post < Base
       alias :post :resource
 
       def self.represents?(json)
@@ -23,16 +23,8 @@ module WpApiClient
         post["id"]
       end
 
-      def terms
-        if embedded?
-          terms = []
-          embedded["https://api.w.org/term"].map do |taxonomy|
-            taxonomy.each do |term|
-              terms << WpApiClient::Entities::Term.new(term, @api)
-            end
-          end
-          terms
-        end
+      def terms(taxonomy = nil)
+        relations("https://api.w.org/term", taxonomy)
       end
     end
   end

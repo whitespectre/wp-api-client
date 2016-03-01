@@ -1,6 +1,6 @@
 module WpApiClient
   module Entities
-    class Taxonomy < BaseEntity
+    class Taxonomy < Base
       alias :taxonomy :resource
 
       def self.represents?(json)
@@ -12,7 +12,7 @@ module WpApiClient
       end
 
       def terms
-        @api.get(links["https://api.w.org/items"].first["href"])
+        relations("https://api.w.org/items", nil)
       end
     end
   end

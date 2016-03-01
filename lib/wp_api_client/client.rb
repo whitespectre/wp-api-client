@@ -1,13 +1,6 @@
 module WpApiClient
   class Client
 
-    Types = [
-      WpApiClient::Entities::Image,
-      WpApiClient::Entities::Post,
-      WpApiClient::Entities::Term,
-      WpApiClient::Entities::Taxonomy
-    ]
-
     def initialize(connection)
       @connection = connection
     end
@@ -27,21 +20,11 @@ module WpApiClient
 
     # Take the API response and figure out what it is
     def native_representation_of(response_body)
+      # Do we have a collection of objects?
       if response_body.is_a? Array
-        collection = true
-        object = response_body.first
+        WpApiClient::Collection.new(response_body, @headers)
       else
-        collection = false
-        object = response_body
-      end
-
-      type = Types.find { |type| type.represents?(object) }
-
-      if collection
-        resources = response_body.map! { |object| type.new(object, self) }
-        WpApiClient::Collection.new(resources, @headers)
-      else
-        type.new(response_body, self)
+        WpApiClient::Entities::Base.build(response_body, self)
       end
     end
   end

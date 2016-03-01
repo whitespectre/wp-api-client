@@ -21,9 +21,8 @@ RSpec.describe WpApiClient::Entities::Post do
       expect(@post.id).to eq 1
     end
 
-    it "returns an array of Term objects" do
-      expect(@post.terms).to be_an Array
-      expect(@post.terms.first).to be_a WpApiClient::Entities::Term
+    it "returns an hash of collections of Term objects" do
+      expect(@post.terms).to be_an Hash
     end
   end
 end

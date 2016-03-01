@@ -10,8 +10,7 @@ RSpec.describe WpApiClient::Entities::Taxonomy do
     end
 
     it "returns a collection of terms" do
-      expect(@taxonomy.terms).to be_a WpApiClient::Collection
-      expect(@taxonomy.terms.first).to be_a WpApiClient::Entities::Term
+      expect(@taxonomy.terms).to be_a Hash
     end
   end
 end

@@ -1,6 +1,6 @@
 module WpApiClient
   module Entities
-    class Term < BaseEntity
+    class Term < Base
       alias :term :resource
 
       def self.represents?(json)
@@ -11,10 +11,8 @@ module WpApiClient
         @api.get(links["about"].first["href"])
       end
 
-      def posts(post_type = "post")
-        post_type_links = links["http://api.w.org/v2/post_type"]
-        link = post_type_links.find { |link| link["href"] =~ /wp\/v2\/#{post_type}/ }
-        @api.get(link["href"]) if link
+      def posts(post_type = nil)
+        relations("http://api.w.org/v2/post_type", post_type)
       end
 
       def name

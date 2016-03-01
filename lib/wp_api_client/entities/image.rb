@@ -1,6 +1,6 @@
 module WpApiClient
   module Entities
-    class Image < BaseEntity
+    class Image < Base
       alias :image :resource
 
       def self.represents?(json)

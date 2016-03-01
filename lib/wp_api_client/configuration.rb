@@ -1,4 +1,5 @@
 module WpApiClient
+
   class << self
     attr_writer :configuration
   end

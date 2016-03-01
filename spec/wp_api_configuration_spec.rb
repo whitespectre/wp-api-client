@@ -25,18 +25,24 @@ RSpec.describe WpApiClient::Configuration do
       end
     end
 
-    it "can specify whether or not to request embedded resources", vcr: {cassette_name: 'single_post', record: :new_episodes} do
-      WpApiClient.configure do |api_client|
-        api_client.embed = true
-      end
-      post = WpApiClient.get_client.get('posts/1')
-      expect(post.embedded?).to be_truthy
+    it "can specify whether or not to request embedded resources" do
+      VCR.turned_off do
 
-      WpApiClient.configure do |api_client|
-        api_client.embed = false
+        WpApiClient.configure do |api_client|
+          api_client.embed = false
+        end
+
+        # get an example API response and mock it
+        resp = YAML.load(File.read 'spec/cassettes/single_post.yml')['http_interactions'][0]['response']['body']['string']
+        ::WebMock.stub_request(:get,
+          WpApiClient.configuration.endpoint + "/posts/1"
+        ).to_return(
+          body: resp,
+          headers: {'Content-Type' => 'application/json'}
+        )
+
+        post = WpApiClient.get_client.get('posts/1')
       end
-      post = WpApiClient.get_client.get('posts/1')
-      expect(post.embedded?).to be_falsy
     end
   end
 end

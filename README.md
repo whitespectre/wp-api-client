@@ -51,7 +51,7 @@ term.taxonomy
 term.posts
 # => #<WpApiClient::Collection:0x007fd65d07d588 @resources=[#<WpApiClient::Entities::Post...
 
-# term.posts.first.terms.first.taxonomy.terms.first... etc etc etc
+# term.posts("custom_post_type").first.terms("category").first.taxonomy... etc etc etc
 ```
 
 #### Pagination
@@ -119,12 +119,10 @@ next_page = @api.get(posts.next_page)
 # => #<WpApiClient::Collection:0x00bbcafe938827 @resources=[#<WpApiClient::Entities::Post...
 ```
 
-#### `WpApiClient::Entities::BaseEntity`
+#### `WpApiClient::Entities::Base`
 
 Base class for `Post`, `Term`, `Image` and `Taxonomy`, so far. Not all methods are implemented.
 
 ## Other
-
-This library puts `?_embed` on every request to save on HTTP requests right now.
 
 Thanks [WP-API](https://github.com/WP-API/WP-API)!
