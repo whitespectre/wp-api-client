@@ -24,5 +24,6 @@ RSpec.describe WpApiClient::Entities::Post do
     it "returns an hash of collections of Term objects" do
       expect(@post.terms).to be_an Hash
     end
+
   end
 end

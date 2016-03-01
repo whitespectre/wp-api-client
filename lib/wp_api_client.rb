@@ -1,7 +1,6 @@
 require "wp_api_client/version"
 require "wp_api_client/configuration"
 
-
 require "wp_api_client/entities/base"
 require "wp_api_client/entities/post"
 require "wp_api_client/entities/taxonomy"
