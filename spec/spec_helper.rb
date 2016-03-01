@@ -31,9 +31,15 @@ end
 
 RSpec.configure do |config|
 
-  config.before(:all) do
-    @connection = WpApiClient::Connection.new('http://localhost:8080/wp-json/wp/v2')
-    @api = WpApiClient::Client.new(@connection)
+  config.before(:each) do
+    WpApiClient.configure do |api_client|
+      api_client.endpoint = 'http://localhost:8080/wp-json/wp/v2'
+    end
+    @api = WpApiClient.get_client
+  end
+
+  config.after(:each) do
+    WpApiClient.reset
   end
 
   # rspec-expectations config goes here. You can use an alternate

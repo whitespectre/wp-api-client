@@ -6,10 +6,9 @@ module WpApiClient
 
     attr_accessor :headers
 
-    def initialize(endpoint)
-      @conn = Faraday.new(:url => endpoint) do |faraday|
-        faraday.request  :url_encoded             # form-encode POST params
-        #faraday.response :logger                  # log requests to STDOUT
+    def initialize(configuration)
+      @configuration = configuration
+      @conn = Faraday.new(url: configuration.endpoint) do |faraday|
         faraday.response :json, :content_type => /\bjson$/
         faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
       end
@@ -17,7 +16,7 @@ module WpApiClient
 
     # translate requests into wp-api urls
     def get(url, params = {})
-      @conn.get url, params.merge({_embed: true})
+      @conn.get url, params.merge(@configuration.request_params)
     end
   end
 end
