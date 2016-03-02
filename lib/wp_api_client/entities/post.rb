@@ -26,6 +26,10 @@ module WpApiClient
       def terms(taxonomy = nil)
         relations("https://api.w.org/term", taxonomy)
       end
+
+      def meta(key = nil)
+        relations("https://api.w.org/meta", key)
+      end
     end
   end
 end

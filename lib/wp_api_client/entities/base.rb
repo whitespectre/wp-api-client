@@ -36,6 +36,11 @@ module WpApiClient
             post_type = URI.parse(link["href"]).path.split('wp/v2/').pop
             relations.merge! Hash[post_type, load_relation(relationship, position)]
           end
+        when "https://api.w.org/meta"
+          meta = @api.get(links[relationship].first["href"])
+          meta.map do |m|
+            relations.merge! Hash[m.key, m.value]
+          end
         end
         if relation_to_return
           relations[relation_to_return]

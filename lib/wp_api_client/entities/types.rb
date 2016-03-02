@@ -3,6 +3,7 @@ module WpApiClient
     Types = [
       Image,
       Post,
+      Meta,
       Term,
       Taxonomy
     ]
