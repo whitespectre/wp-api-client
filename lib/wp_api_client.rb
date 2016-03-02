@@ -14,7 +14,7 @@ require "wp_api_client/connection"
 require "wp_api_client/collection"
 
 module WpApiClient
-  def self.get_client(&options)
+  def self.get_client
     Client.new(Connection.new(configuration))
   end
 end

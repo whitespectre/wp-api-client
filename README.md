@@ -2,7 +2,7 @@
 
 This unambitious client provides read-only access for WP-API v2.
 
-It does not support authentication (yet).
+It supports authentication via OAuth.
 
 It does not support comments or POST requests.
 
@@ -26,8 +26,12 @@ require 'wp_api_client'
 
 ```ruby
 # create a client
-@connection = WpApiClient::Connection.new('http://localhost:8080/wp-json/wp/v2')
-@api = WpApiClient::Client.new(@connection)
+
+WpApiClient.configure do |api_client|
+  api_client.endpoint = 'http://example.com/wp-json/wp/v2'
+end
+
+@api = WpApiClient.get_client
 
 # get some posts
 posts = @api.get('custom_post_type/') # or "posts/" etc
@@ -80,6 +84,18 @@ WP-API returns an array even if there's only one result, so you need to be caref
 term = @api.get('custom_taxonomy', slug: 'term_one').first
 taxonomy_name = term.taxonomy.name
 posts = term.posts
+```
+
+#### OAuth
+
+Provide a symbol-keyed hash of `token`, `token_secret`, `consumer_key` and `consumer_secret` on configuration.
+
+```ruby
+WpApiClient.configure do |api_client|
+  api_client.oauth_credentials = oauth_credentials_hash
+end
+
+client = WpApiClient.get_client
 ```
 
 ## Testing and compatibility
