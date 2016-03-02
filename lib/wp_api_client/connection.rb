@@ -9,7 +9,9 @@ module WpApiClient
     def initialize(configuration)
       @configuration = configuration
       @conn = Faraday.new(url: configuration.endpoint) do |faraday|
-        #faraday.response :logger                  # log requests to STDOUT
+        if configuration.oauth_credentials
+          faraday.use FaradayMiddleware::OAuth, configuration.oauth_credentials
+        end
         faraday.response :json, :content_type => /\bjson$/
         faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
       end
