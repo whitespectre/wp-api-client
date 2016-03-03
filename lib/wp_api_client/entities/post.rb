@@ -23,6 +23,10 @@ module WpApiClient
         post["content"]["rendered"]
       end
 
+      def excerpt
+        post["excerpt"]["rendered"]
+      end
+
       def id
         post["id"]
       end
