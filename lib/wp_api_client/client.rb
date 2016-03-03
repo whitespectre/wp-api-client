@@ -24,7 +24,7 @@ module WpApiClient
       if response_body.is_a? Array
         WpApiClient::Collection.new(response_body, @headers)
       else
-        WpApiClient::Entities::Base.build(response_body, self)
+        WpApiClient::Entities::Base.build(response_body)
       end
     end
   end

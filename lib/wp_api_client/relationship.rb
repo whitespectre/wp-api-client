@@ -48,7 +48,7 @@ module WpApiClient
 
       def meta(r)
         relations = {}
-        meta = r.api.get(r.resource["_links"][r.relation].first["href"])
+        meta = WpApiClient.get_client.get(r.resource["_links"][r.relation].first["href"])
         meta.map do |m|
           relations.merge! Hash[m.key, m.value]
         end
@@ -58,10 +58,8 @@ module WpApiClient
 
     attr_reader :resource
     attr_reader :relation
-    attr_reader :api
 
-    def initialize(api, resource, relation)
-      @api = api
+    def initialize(resource, relation)
       @resource = resource
       @relation = relation
     end
@@ -101,7 +99,7 @@ Available mappings are :post, :term, and :meta.}
         else
           location = @resource["_links"][relationship]["href"]
         end
-        @api.get(location) if location
+        WpApiClient.get_client.get(location) if location
       end
     end
   end

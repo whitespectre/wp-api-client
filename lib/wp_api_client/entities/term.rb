@@ -8,7 +8,7 @@ module WpApiClient
       end
 
       def taxonomy
-        @api.get(links["about"].first["href"])
+        WpApiClient.get_client.get(links["about"].first["href"])
       end
 
       def posts(post_type = nil)

@@ -6,7 +6,7 @@ module WpApiClient
 
     def initialize(resources, headers = nil)
       resources = [resources] unless resources.is_a? Array
-      @resources = resources.map { |object| WpApiClient::Entities::Base.build(object, self) }
+      @resources = resources.map { |object| WpApiClient::Entities::Base.build(object) }
       if headers
         @links = parse_link_header(headers['Link'])
         @total_available = headers['X-WP-TOTAL'].to_i

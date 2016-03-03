@@ -3,6 +3,10 @@ require 'webmock/rspec'
 RSpec.describe WpApiClient::Configuration do
   describe "#configure" do
 
+    before(:each) do
+      WpApiClient.reset!
+    end
+
     it "can set the endpoint URL for the API connection" do
       VCR.turned_off do
 
@@ -47,6 +51,7 @@ RSpec.describe WpApiClient::Configuration do
 
     it "can set up OAuth credentials", vcr: {cassette_name: :oauth_test} do
       oauth_credentials = JSON.parse(File.read('config/oauth.json'), symbolize_names: true)
+
       WpApiClient.configure do |api_client|
         api_client.oauth_credentials = oauth_credentials
       end
