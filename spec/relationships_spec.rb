@@ -25,6 +25,19 @@ RSpec.describe WpApiClient::Relationship do
     end
   end
 
+  describe "relationships with featured images", vcr: {cassette_name: 'single_post'} do
+    before :each do
+      term = @api.get("posts/1")
+      @relationship = WpApiClient::Relationship.new(@api, term.resource, "https://api.w.org/featuredmedia")
+    end
+
+    it "returns an collection of posts" do
+      relations = @relationship.get_relations
+      expect(relations).to be_a WpApiClient::Collection
+      expect(relations.first).to be_a WpApiClient::Entities::Image
+    end
+  end
+
   describe "relationships with metadata", vcr: {cassette_name: 'single_post', record: :new_episodes} do
     before :each do
       # we need oAuth for this
@@ -41,15 +54,6 @@ RSpec.describe WpApiClient::Relationship do
       relations = @relationship.get_relations
       expect(relations).to be_a Hash
       expect(relations["example_metadata_field"]).to be_a String
-    end
-  end
-
-  describe "defining a new relationship" do
-
-    it "permits new relationships to be defined", vcr: {cassette_name: 'single_post'} do
-      WpApiClient::Relationship.define("https://my.new/relationship", :post)
-      post = @api.get("posts/1")
-      @relationship = WpApiClient::Relationship.new(@api, post.resource, "https://my.new/relationship")
     end
   end
 

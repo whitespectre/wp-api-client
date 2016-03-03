@@ -19,7 +19,8 @@ module WpApiClient
           "https://api.w.org/term" => :term,
           "https://api.w.org/items" => :term,
           "http://api.w.org/v2/post_type" => :post_type,
-          "https://api.w.org/meta" => :meta
+          "https://api.w.org/meta" => :meta,
+          "https://api.w.org/featuredmedia" => :post
         }
       end
 
