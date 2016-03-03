@@ -76,6 +76,54 @@ page_after_that = @api.get(next_page.page_after_that)
 # => #<WpApiClient::Collection:0x00bbcafe938827 @resources=[#<WpApiClient::Entities::Post...
 ```
 
+#### Defining relationships
+
+The [REST API docs](http://v2.wp-api.org/extending/linking/) invite you to define
+custom relationships to go alongside "http://api.w.org/term" etc.
+
+For example, let's say you have a `person` post type and a post-to-post relation
+defined through meta and exposed in the REST API like this:
+
+```php
+add_filter( 'rest_prepare_king', function( $data, $king ) {
+	if( $king->queen ) {
+		$data->add_link(
+			'http://api.myuniqueuri.com/marriage',
+			rest_url( '/wp/v2/person/'.$king->queen ),
+			['embeddable' => true]
+		);
+	}
+	return $data;
+}, 10, 2);
+```
+
+(This will cause the `http://api.myuniqueuri.com/marriage` relation to be reflected
+in your `_links` property when you call up the King from the REST API).
+
+You'll get an error if you try to query this relationship.
+
+```ruby
+king = @api.get('person/1')
+queen = king.relations("http://api.myuniqueuri.com/marriage").first
+# => throws WpApiClient::RelationNotDefined
+```
+
+The solution is to register the relationship on configuration:
+
+```ruby
+WpApiClient.configure do |c|
+  c.define_mapping("http://api.myuniqueuri.com/marriage", :post)
+end
+
+...
+
+king = @api.get('person/1')
+queen = king.relations("http://api.myuniqueuri.com/marriage").first
+# => #<WpApiClient::Entities::Post:0x007fed42b3e458 @resource={"id"=>2...
+```
+
+There is currently support for `:post`, `:term` and `:meta` (key/value) relations.
+
 #### Loading a taxonomy via a slug
 
 WP-API returns an array even if there's only one result, so you need to be careful here
@@ -102,6 +150,8 @@ client = WpApiClient.get_client
 
 This library comes with VCR cassettes recorded against a local WP installation
 running WP-API v2-beta12. It is not tested with other versions.
+
+If you want to make your own VCR cassettes, use [these scripts](https://github.com/duncanjbrown/WP-REST-Test).
 
 To run the tests, invoke `rspec`.
 

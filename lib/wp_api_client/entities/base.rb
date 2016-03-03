@@ -23,40 +23,13 @@ module WpApiClient
         resource["_links"]
       end
 
-      def relations(relationship, relation_to_return = nil)
-        relations = {}
-        case relationship
-        when "https://api.w.org/term"
-          links[relationship].each_with_index do |link, position|
-            relations.merge! Hash[link["taxonomy"], load_relation(relationship, position)]
-          end
-        when "http://api.w.org/v2/post_type"
-          links[relationship].each_with_index do |link, position|
-            # get the post type out of the linked URL.
-            post_type = URI.parse(link["href"]).path.split('wp/v2/').pop
-            relations.merge! Hash[post_type, load_relation(relationship, position)]
-          end
-        when "https://api.w.org/meta"
-          meta = @api.get(links[relationship].first["href"])
-          meta.map do |m|
-            relations.merge! Hash[m.key, m.value]
-          end
-        end
+      def relations(relation, relation_to_return = nil)
+        relationship = Relationship.new(@api, @resource, relation)
+        relations = relationship.get_relations
         if relation_to_return
           relations[relation_to_return]
         else
           relations
-        end
-      end
-
-    private
-
-      # try to load an embedded object; call out to the API if not
-      def load_relation(relationship, position)
-        if objects = resource.dig("_embedded", relationship)
-          WpApiClient::Collection.new(objects[position])
-        else
-          @api.get(links[relationship][position]["href"])
         end
       end
     end

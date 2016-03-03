@@ -11,6 +11,10 @@ module WpApiClient
         post["title"]["rendered"]
       end
 
+      def slug
+        post["slug"]
+      end
+
       def date
         Time.new(post["date_gmt"])
       end

@@ -12,7 +12,7 @@ module WpApiClient
       end
 
       def terms
-        relations("https://api.w.org/items", nil)
+        relations("https://api.w.org/items")
       end
     end
   end

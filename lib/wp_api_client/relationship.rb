@@ -18,7 +18,7 @@ module WpApiClient
         {
           "https://api.w.org/term" => :term,
           "https://api.w.org/items" => :term,
-          "http://api.w.org/v2/post_type" => :post,
+          "http://api.w.org/v2/post_type" => :post_type,
           "https://api.w.org/meta" => :meta
         }
       end
@@ -31,7 +31,7 @@ module WpApiClient
         relations
       end
 
-      def post(r)
+      def post_type(r)
         relations = {}
         r.resource["_links"][r.relation].each_with_index do |link, position|
           # get the post type out of the linked URL.
@@ -39,6 +39,10 @@ module WpApiClient
           relations.merge! Hash[post_type, r.load_relation(r.relation, position)]
         end
         relations
+      end
+
+      def post(r)
+        r.load_relation(r.relation)
       end
 
       def meta(r)

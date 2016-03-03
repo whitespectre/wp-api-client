@@ -20,10 +20,15 @@ module WpApiClient
     attr_accessor :endpoint
     attr_accessor :embed
     attr_accessor :oauth_credentials
+    attr_accessor :relationships
 
     def initialize
       @endpoint = 'http://localhost:8080/wp-json/wp/v2'
       @embed = true
+    end
+
+    def define_mapping(relation, type)
+      WpApiClient::Relationship.define(relation, type)
     end
 
     def request_params

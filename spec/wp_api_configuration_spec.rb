@@ -53,5 +53,14 @@ RSpec.describe WpApiClient::Configuration do
 
       WpApiClient.get_client.get('posts/1')
     end
+
+    it "can set up link relationships", vcr: {cassette_name: :single_post} do
+      WpApiClient.configure do |api_client|
+        api_client.define_mapping("http://my.own/mapping", :post)
+      end
+
+      post = WpApiClient.get_client.get('posts/1')
+      expect { post.relations("http://my.own/mapping") }.not_to raise_error
+    end
   end
 end

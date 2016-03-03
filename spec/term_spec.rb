@@ -17,9 +17,6 @@ RSpec.describe WpApiClient::Entities::Term do
       expect(@term.taxonomy).to be_a WpApiClient::Entities::Taxonomy
     end
 
-    it "returns an collection of posts" do
-      expect(@term.posts).to be_a Hash
-    end
   end
 
   describe "a term connected to two different post types",  vcr: {cassette_name: 'single_term', record: :new_episodes} do

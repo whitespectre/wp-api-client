@@ -21,8 +21,8 @@ RSpec.describe WpApiClient::Entities::Post do
       expect(@post.id).to eq 1
     end
 
-    it "returns an hash of collections of Term objects" do
-      expect(@post.terms).to be_an Hash
+    it "returns its own slug" do
+      expect(@post.slug).to eq 'hello-world'
     end
 
   end
