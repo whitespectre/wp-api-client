@@ -25,10 +25,6 @@ module WpApiClient
       @links[:prev] && @links[:prev]
     end
 
-    def method_missing(sym)
-      @resources.send(sym)
-    end
-
 private
 
     # https://www.snip2code.com/Snippet/71914/Parse-link-headers-from-Github-API-in-Ru

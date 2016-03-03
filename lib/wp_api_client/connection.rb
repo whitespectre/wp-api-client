@@ -12,6 +12,9 @@ module WpApiClient
         if configuration.oauth_credentials
           faraday.use FaradayMiddleware::OAuth, configuration.oauth_credentials
         end
+        if configuration.debug
+          faraday.response :logger
+        end
         faraday.use Faraday::Response::RaiseError
         faraday.response :json, :content_type => /\bjson$/
         faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
