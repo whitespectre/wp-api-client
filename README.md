@@ -4,7 +4,7 @@ This unambitious client provides read-only access for WP-API v2.
 
 It supports authentication via OAuth.
 
-It does not support comments or POST requests.
+It does not support comments, users or POST requests.
 
 It requires **Ruby 2.3** and is tested against **WP-API 2.0-beta12**.
 
@@ -97,10 +97,10 @@ add_filter( 'rest_prepare_king', function( $data, $king ) {
 }, 10, 2);
 ```
 
-(This will cause the `http://api.myuniqueuri.com/marriage` relation to be reflected
-in your `_links` property when you call up the King from the REST API).
+This will cause the `http://api.myuniqueuri.com/marriage` relation to be reflected
+in your `_links` property when you call up the King from the REST API.
 
-You'll get an error if you try to query this relationship.
+But you'll get an error if you try to query this relationship using the client.
 
 ```ruby
 king = @api.get('person/1')
@@ -122,7 +122,7 @@ queen = king.relations("http://api.myuniqueuri.com/marriage").first
 # => #<WpApiClient::Entities::Post:0x007fed42b3e458 @resource={"id"=>2...
 ```
 
-There is currently support for `:post`, `:term` and `:meta` (key/value) relations.
+There is currently support for `:post_type`, `:post`, `:term` and `:meta` (key/value) relations.
 
 #### Loading a taxonomy via a slug
 
