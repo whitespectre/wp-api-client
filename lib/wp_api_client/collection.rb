@@ -5,6 +5,7 @@ module WpApiClient
     attr_accessor :resources, :total_available
 
     def initialize(resources, headers = nil)
+      resources = [resources] unless resources.is_a? Array
       @resources = resources.map { |object| WpApiClient::Entities::Base.build(object, self) }
       if headers
         @links = parse_link_header(headers['Link'])

@@ -22,5 +22,14 @@ RSpec.describe WpApiClient::Collection do
       # no pages left to turn
       expect(@previous_page.previous_page).to eq nil
     end
+
+    it "accepts array and non-array input" do
+      single_post = @collection.first
+      expect(single_post).not_to be_an Array
+
+      expect {
+        WpApiClient::Collection.new(single_post.resource)
+      }.not_to raise_error
+    end
   end
 end
