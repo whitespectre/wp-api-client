@@ -36,7 +36,7 @@ module WpApiClient
       end
 
       def meta(key = nil)
-        relations("https://api.w.org/meta", key)
+        @meta ||= relations("https://api.w.org/meta", key)
       end
     end
   end
