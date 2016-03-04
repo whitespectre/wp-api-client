@@ -16,7 +16,7 @@ module WpApiClient
       end
 
       def date
-        Time.parse(post["date_gmt"])
+        Time.parse(post["date_gmt"]) if post["date_gmt"]
       end
 
       def content
