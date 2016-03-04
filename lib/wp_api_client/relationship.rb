@@ -17,7 +17,7 @@ module WpApiClient
       def default_mappings
         {
           "https://api.w.org/term" => :term,
-          "https://api.w.org/items" => :term,
+          "https://api.w.org/items" => :terms,
           "http://api.w.org/v2/post_type" => :post_type,
           "https://api.w.org/meta" => :meta,
           "https://api.w.org/featuredmedia" => :post
@@ -30,6 +30,10 @@ module WpApiClient
           relations.merge! Hash[link["taxonomy"], r.load_relation(r.relation, position)]
         end
         relations
+      end
+
+      def terms(r)
+        r.load_relation(r.relation, 0)
       end
 
       def post_type(r)
@@ -94,8 +98,8 @@ Available mappings are :post, :term, and :meta.}
         location = position ? objects[position] : objects
         WpApiClient::Collection.new(location)
       else
-        if position
-          location = @resource["_links"].dig(relationship, position, "href")
+        unless position.nil?
+          location = @resource["_links"].dig(relationship, position.to_i, "href")
         else
           location = @resource["_links"][relationship]["href"]
         end
