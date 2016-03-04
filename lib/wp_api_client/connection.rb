@@ -1,5 +1,6 @@
 require 'faraday'
 require 'faraday_middleware'
+require 'faraday-http-cache'
 
 module WpApiClient
   class Connection
@@ -9,12 +10,19 @@ module WpApiClient
     def initialize(configuration)
       @configuration = configuration
       @conn = Faraday.new(url: configuration.endpoint) do |faraday|
+
         if configuration.oauth_credentials
           faraday.use FaradayMiddleware::OAuth, configuration.oauth_credentials
         end
+
         if configuration.debug
           faraday.response :logger
         end
+
+        if configuration.cache
+          faraday.use :http_cache, store: configuration.cache
+        end
+
         faraday.use Faraday::Response::RaiseError
         faraday.response :json, :content_type => /\bjson$/
         faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
