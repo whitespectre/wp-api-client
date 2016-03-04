@@ -15,6 +15,10 @@ module WpApiClient
           faraday.use FaradayMiddleware::OAuth, configuration.oauth_credentials
         end
 
+        if configuration.basic_auth
+          faraday.basic_auth(configuration.basic_auth[:username], configuration.basic_auth[:password])
+        end
+
         if configuration.debug
           faraday.response :logger
         end

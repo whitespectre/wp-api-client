@@ -2,7 +2,7 @@
 
 This unambitious client provides read-only access for WP-API v2.
 
-It supports authentication via OAuth.
+It supports authentication via OAuth or Basic Auth.
 
 It does not support comments, users or POST requests.
 
@@ -141,6 +141,18 @@ Provide a symbol-keyed hash of `token`, `token_secret`, `consumer_key` and `cons
 ```ruby
 WpApiClient.configure do |api_client|
   api_client.oauth_credentials = oauth_credentials_hash
+end
+
+client = WpApiClient.get_client
+```
+
+#### Basic Auth
+
+Provide a symbol-keyed hash of `username` and `password` on configuration.
+
+```ruby
+WpApiClient.configure do |api_client|
+  api_client.basic_auth = {username: 'miles', password: 'smile'}
 end
 
 client = WpApiClient.get_client

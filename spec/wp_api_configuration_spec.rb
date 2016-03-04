@@ -68,4 +68,6 @@ RSpec.describe WpApiClient::Configuration do
       expect { post.relations("http://my.own/mapping") }.not_to raise_error
     end
   end
+
+
 end
