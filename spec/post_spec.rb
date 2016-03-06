@@ -26,4 +26,35 @@ RSpec.describe WpApiClient::Entities::Post do
     end
 
   end
+
+  describe "meta function" do
+
+    it "returns an individual meta value" do
+      VCR.use_cassette('single_post') do
+        @post = @api.get("posts/1")
+        expect(@post.meta(:example_metadata_field)).to eq "example_meta_value"
+      end
+    end
+
+    it "caches" do
+      VCR.use_cassette('single_post') do
+        @post = @api.get("posts/1")
+        meta_value = @post.meta(:example_metadata_field)
+      end
+      VCR.turned_off do
+        ::WebMock.disable_net_connect!
+        expect {
+          @post.meta(:example_associated_post_id)
+        }.to_not raise_error
+      end
+    end
+
+    it "returns the right items from cache" do
+      VCR.use_cassette('single_post') do
+        @post = @api.get("posts/1")
+        expect(@post.meta(:example_metadata_field)).to eq "example_meta_value"
+        expect(@post.meta(:example_associated_post_id)).to eq "100" 
+      end
+    end
+  end
 end
