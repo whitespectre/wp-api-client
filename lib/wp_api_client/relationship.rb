@@ -101,7 +101,14 @@ Available mappings are :post, :term, and :meta.}
         unless position.nil?
           location = @resource["_links"].dig(relationship, position.to_i, "href")
         else
-          location = @resource["_links"][relationship]["href"]
+          if @resource["_links"][relationship].is_a? Array
+            # If the resources are linked severally, crank through and
+            # retrieve them one by one as an array
+            return @resource["_links"][relationship].map { |link| WpApiClient.get_client.get(link["href"]) }
+          else
+            # Otherwise, get the single link to the lot
+            location = @resource["_links"][relationship]["href"]
+          end
         end
         WpApiClient.get_client.get(location) if location
       end
