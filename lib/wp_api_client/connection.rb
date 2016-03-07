@@ -35,7 +35,17 @@ module WpApiClient
 
     # translate requests into wp-api urls
     def get(url, params = {})
-      @conn.get url, params.merge(@configuration.request_params)
+      @conn.get url, parse_params(params)
+    end
+
+    def parse_params(params)
+      params = @configuration.request_params.merge(params)
+      # if _embed is present at all it will have the effect of embedding —
+      # even if it's set to "false"
+      if params[:_embed] == false
+        params.delete(:_embed)
+      end
+      params
     end
   end
 end
