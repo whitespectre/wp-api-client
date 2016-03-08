@@ -6,16 +6,21 @@ module WpApiClient
     end
 
     def get(url, params = {})
-      response = @connection.get(api_path_from(url), params)
-      @headers = response.headers
-
-      native_representation_of response.body
+      if @concurrent_client
+        @concurrent_client.get(api_path_from(url), params)
+      else
+        response = @connection.get(api_path_from(url), params)
+        @headers = response.headers
+        native_representation_of response.body
+      end
     end
 
     def concurrently
-      client = ConcurrentClient.new(@connection)
-      yield client
-      client.run
+      @concurrent_client ||= ConcurrentClient.new(@connection)
+      yield @concurrent_client
+      result = @concurrent_client.run
+      @concurrent_client = nil
+      result
     end
 
   private
