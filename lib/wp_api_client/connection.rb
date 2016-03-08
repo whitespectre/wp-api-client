@@ -1,15 +1,18 @@
 require 'faraday'
 require 'faraday_middleware'
 require 'faraday-http-cache'
+require 'typhoeus'
 require 'typhoeus/adapters/faraday'
 
 module WpApiClient
   class Connection
 
     attr_accessor :headers
+    attr_reader :concurrent
 
     def initialize(configuration)
       @configuration = configuration
+      @queue = []
       @conn = Faraday.new(url: configuration.endpoint) do |faraday|
 
         if configuration.oauth_credentials
@@ -39,6 +42,19 @@ module WpApiClient
       @conn.get url, parse_params(params)
     end
 
+    # requests come in as url/params pairs
+    def get_concurrently(requests)
+      responses = []
+      @conn.in_parallel do
+        requests.map do |r|
+          responses << get(r[0], r[1])
+        end
+      end
+      responses
+    end
+
+private
+
     def parse_params(params)
       params = @configuration.request_params.merge(params)
       # if _embed is present at all it will have the effect of embedding —
@@ -48,5 +64,7 @@ module WpApiClient
       end
       params
     end
+
+
   end
 end

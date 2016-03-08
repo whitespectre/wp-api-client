@@ -12,6 +12,12 @@ module WpApiClient
       native_representation_of response.body
     end
 
+    def concurrently
+      client = ConcurrentClient.new(@connection)
+      yield client
+      client.run
+    end
+
   private
 
     def api_path_from(url)

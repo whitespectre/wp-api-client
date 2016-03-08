@@ -11,6 +11,7 @@ require "wp_api_client/entities/image"
 require "wp_api_client/entities/types"
 
 require "wp_api_client/client"
+require "wp_api_client/concurrent_client"
 require "wp_api_client/connection"
 require "wp_api_client/collection"
 require "wp_api_client/relationship"
