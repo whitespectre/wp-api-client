@@ -4,6 +4,8 @@ This unambitious client provides read-only access for WP-API v2.
 
 It supports authentication via OAuth or Basic Auth.
 
+It can make concurrent requests.
+
 It does not support comments, users or POST requests.
 
 It requires **Ruby 2.3** and is tested against **WP-API 2.0-beta12**.
@@ -156,6 +158,23 @@ WpApiClient.configure do |api_client|
 end
 
 client = WpApiClient.get_client
+```
+
+## Concurrency
+
+WP-API is _slow_: a typical request takes 0.5s. To mitigate this, I recommend
+caching all your responses sensibly, and when you need to fetch, do so concurrently
+as far as is possible.
+
+```ruby
+results = []
+client.concurrently do |api|
+  results << api.get('post/1')
+  results << api.get('post/2')
+  results << api.get('post/3')
+end
+results
+# => [#<WpApiClient::Entities::Post>, #<WpApiClient::Entities::Post, #<WpApiClient::Entities::Post]
 ```
 
 ## Testing and compatibility

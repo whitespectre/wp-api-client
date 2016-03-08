@@ -25,10 +25,11 @@ module WpApiClient
 
         if configuration.debug
           faraday.response :logger
+          faraday.use :instrumentation
         end
 
         if configuration.cache
-          faraday.use :http_cache, store: configuration.cache
+          faraday.use :http_cache, store: configuration.cache, shared_cache: false
         end
 
         faraday.use Faraday::Response::RaiseError

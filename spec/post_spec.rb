@@ -30,14 +30,14 @@ RSpec.describe WpApiClient::Entities::Post do
   describe "meta function" do
 
     it "returns an individual meta value" do
-      VCR.use_cassette('single_post') do
+      VCR.use_cassette('single_post', record: :new_episodes) do
         @post = @api.get("posts/1")
         expect(@post.meta(:example_metadata_field)).to eq "example_meta_value"
       end
     end
 
     it "caches" do
-      VCR.use_cassette('single_post') do
+      VCR.use_cassette('single_post', record: :new_episodes) do
         @post = @api.get("posts/1")
         meta_value = @post.meta(:example_metadata_field)
       end
@@ -50,10 +50,10 @@ RSpec.describe WpApiClient::Entities::Post do
     end
 
     it "returns the right items from cache" do
-      VCR.use_cassette('single_post') do
+      VCR.use_cassette('single_post', record: :new_episodes) do
         @post = @api.get("posts/1")
         expect(@post.meta(:example_metadata_field)).to eq "example_meta_value"
-        expect(@post.meta(:example_associated_post_id)).to eq "100" 
+        expect(@post.meta(:example_associated_post_id)).to eq "100"
       end
     end
   end
