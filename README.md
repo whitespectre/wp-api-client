@@ -74,7 +74,7 @@ posts.total_available
 next_page = @api.get(posts.next_page)
 # => #<WpApiClient::Collection:0x00bbcafe938827 @resources=[#<WpApiClient::Entities::Post...
 
-page_after_that = @api.get(next_page.page_after_that)
+page_after_that = @api.get(next_page.next_page)
 # => #<WpApiClient::Collection:0x00bbcafe938827 @resources=[#<WpApiClient::Entities::Post...
 ```
 
