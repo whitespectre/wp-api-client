@@ -34,7 +34,7 @@ http_interactions:
       encoding: UTF-8
       string: '{"name":"Custom taxonomy","slug":"custom_taxonomy","description":"","types":["custom_post_type","post"],"hierarchical":false,"_links":{"collection":[{"href":"http:\/\/localhost:8080\/wp-json\/wp\/v2\/taxonomies"}],"https:\/\/api.w.org\/items":[{"href":"http:\/\/localhost:8080\/wp-json\/wp\/v2\/custom_taxonomy"}]}}'
     http_version: 
-  recorded_at: Tue, 08 Mar 2016 14:47:21 GMT
+  recorded_at: Wed, 09 Mar 2016 18:22:12 GMT
 - request:
     method: get
     uri: http://localhost:8080/wp-json/wp/v2/custom_taxonomy?_embed=true
@@ -73,5 +73,5 @@ http_interactions:
       encoding: UTF-8
       string: '[{"id":2,"count":20,"description":"","link":"http:\/\/localhost:8080\/custom_taxonomy\/term_one\/","name":"term_one","slug":"term_one","taxonomy":"custom_taxonomy","_links":{"self":[{"href":"http:\/\/localhost:8080\/wp-json\/wp\/v2\/custom_taxonomy\/2"}],"collection":[{"href":"http:\/\/localhost:8080\/wp-json\/wp\/v2\/custom_taxonomy"}],"about":[{"href":"http:\/\/localhost:8080\/wp-json\/wp\/v2\/taxonomies\/custom_taxonomy"}],"http:\/\/api.w.org\/v2\/post_type":[{"href":"http:\/\/localhost:8080\/wp-json\/wp\/v2\/custom_post_type?custom_taxonomy=2"},{"href":"http:\/\/localhost:8080\/wp-json\/wp\/v2\/posts?custom_taxonomy=2"}]}},{"id":3,"count":10,"description":"","link":"http:\/\/localhost:8080\/custom_taxonomy\/term_two\/","name":"term_two","slug":"term_two","taxonomy":"custom_taxonomy","_links":{"self":[{"href":"http:\/\/localhost:8080\/wp-json\/wp\/v2\/custom_taxonomy\/3"}],"collection":[{"href":"http:\/\/localhost:8080\/wp-json\/wp\/v2\/custom_taxonomy"}],"about":[{"href":"http:\/\/localhost:8080\/wp-json\/wp\/v2\/taxonomies\/custom_taxonomy"}],"http:\/\/api.w.org\/v2\/post_type":[{"href":"http:\/\/localhost:8080\/wp-json\/wp\/v2\/custom_post_type?custom_taxonomy=3"},{"href":"http:\/\/localhost:8080\/wp-json\/wp\/v2\/posts?custom_taxonomy=3"}]}}]'
     http_version: 
-  recorded_at: Tue, 08 Mar 2016 14:47:21 GMT
+  recorded_at: Wed, 09 Mar 2016 18:22:12 GMT
 recorded_with: VCR 3.0.1

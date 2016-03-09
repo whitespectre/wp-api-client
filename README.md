@@ -174,7 +174,7 @@ client.concurrently do |api|
   results << api.get('post/3')
 end
 results
-# => [#<WpApiClient::Entities::Post>, #<WpApiClient::Entities::Post, #<WpApiClient::Entities::Post]
+# => [#<WpApiClient::Entities::Post>, #<WpApiClient::Entities::Post, #<WpApiClient::Entities::Post>]
 ```
 
 ## Testing and compatibility

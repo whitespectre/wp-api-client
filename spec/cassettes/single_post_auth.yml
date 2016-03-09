@@ -10,9 +10,9 @@ http_interactions:
       User-Agent:
       - Faraday v0.9.2
       Authorization:
-      - OAuth oauth_consumer_key="U4bSluJLH8YU", oauth_nonce="dec6c326b435bb2ddf07133178f0fc48",
-        oauth_signature="y0lDP%2F%2Fws2mu%2B3e%2B9d%2Fd9RGTjI8%3D", oauth_signature_method="HMAC-SHA1",
-        oauth_timestamp="1457547733", oauth_token="Hks4l9IAKPbVkMsGvX9ZEbVJ", oauth_version="1.0"
+      - OAuth oauth_consumer_key="U4bSluJLH8YU", oauth_nonce="3a7b3122be624ddb7cf99e17e905cdf0",
+        oauth_signature="wMosXvI2EG3P3rTFTu5hPE2MwP8%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1457547730", oauth_token="Hks4l9IAKPbVkMsGvX9ZEbVJ", oauth_version="1.0"
   response:
     status:
       code: 200
@@ -56,5 +56,56 @@ http_interactions:
         parameter(s): context (context is not one of edit)","data":{"status":400,"params":["context
         (context is not one of edit)"]}}]}}'
     http_version: 
-  recorded_at: Wed, 09 Mar 2016 18:22:13 GMT
+  recorded_at: Wed, 09 Mar 2016 18:22:10 GMT
+- request:
+    method: get
+    uri: http://localhost:8080/wp-json/wp/v2/posts/1/meta?_embed=true
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.2
+      Authorization:
+      - OAuth oauth_consumer_key="U4bSluJLH8YU", oauth_nonce="d184a152f494cc253360318a20f9c2cb",
+        oauth_signature="HT3qHFeQ6yPp8rBEPkjkFTlDvJw%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1457547730", oauth_token="Hks4l9IAKPbVkMsGvX9ZEbVJ", oauth_version="1.0"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Host:
+      - localhost:8080
+      Connection:
+      - close
+      X-Powered-By:
+      - PHP/5.6.9
+      Content-Type:
+      - application/json; charset=UTF-8
+      X-Content-Type-Options:
+      - nosniff
+      Access-Control-Expose-Headers:
+      - X-WP-Total, X-WP-TotalPages
+      Access-Control-Allow-Headers:
+      - Authorization
+      Expires:
+      - Wed, 11 Jan 1984 05:00:00 GMT
+      Cache-Control:
+      - no-cache, must-revalidate, max-age=0
+      Pragma:
+      - no-cache
+      Last-Modified:
+      - ''
+      Allow:
+      - GET, POST
+    body:
+      encoding: UTF-8
+      string: '[{"id":205,"key":"example_metadata_field","value":"example_meta_value","_links":{"about":[{"embeddable":true,"href":"http:\/\/localhost:8080\/wp-json\/wp\/v2\/posts\/1"}]},"_embedded":{"about":[{"id":1,"date":"2016-03-02T01:12:04","slug":"hello-world","type":"post","link":"http:\/\/localhost:8080\/%post%\/","title":{"rendered":"Hello
+        world!"},"excerpt":{"rendered":"<p>Welcome to WordPress. This is your first
+        post. Edit or delete it, then start writing!<\/p>\n"},"author":1,"_links":{"self":[{"href":"http:\/\/localhost:8080\/wp-json\/wp\/v2\/posts\/1"}],"collection":[{"href":"http:\/\/localhost:8080\/wp-json\/wp\/v2\/posts"}],"about":[{"href":"http:\/\/localhost:8080\/wp-json\/wp\/v2\/types\/post"}],"author":[{"embeddable":true,"href":"http:\/\/localhost:8080\/wp-json\/wp\/v2\/users\/1"}],"replies":[{"embeddable":true,"href":"http:\/\/localhost:8080\/wp-json\/wp\/v2\/comments?post=1"}],"version-history":[{"href":"http:\/\/localhost:8080\/wp-json\/wp\/v2\/posts\/1\/revisions"}],"https:\/\/api.w.org\/featuredmedia":[{"embeddable":true,"href":"http:\/\/localhost:8080\/wp-json\/wp\/v2\/media\/203"}],"https:\/\/api.w.org\/attachment":[{"href":"http:\/\/localhost:8080\/wp-json\/wp\/v2\/media?parent=1"}],"https:\/\/api.w.org\/term":[{"taxonomy":"category","embeddable":true,"href":"http:\/\/localhost:8080\/wp-json\/wp\/v2\/categories?post=1"},{"taxonomy":"post_tag","embeddable":true,"href":"http:\/\/localhost:8080\/wp-json\/wp\/v2\/tags?post=1"},{"taxonomy":"custom_taxonomy","embeddable":true,"href":"http:\/\/localhost:8080\/wp-json\/wp\/v2\/custom_taxonomy?post=1"}],"https:\/\/api.w.org\/meta":[{"embeddable":true,"href":"http:\/\/localhost:8080\/wp-json\/wp\/v2\/posts\/1\/meta"}]}}]}},{"id":206,"key":"example_associated_post_id","value":"100","_links":{"about":[{"embeddable":true,"href":"http:\/\/localhost:8080\/wp-json\/wp\/v2\/posts\/1"}]},"_embedded":{"about":[{"id":1,"date":"2016-03-02T01:12:04","slug":"hello-world","type":"post","link":"http:\/\/localhost:8080\/%post%\/","title":{"rendered":"Hello
+        world!"},"excerpt":{"rendered":"<p>Welcome to WordPress. This is your first
+        post. Edit or delete it, then start writing!<\/p>\n"},"author":1,"_links":{"self":[{"href":"http:\/\/localhost:8080\/wp-json\/wp\/v2\/posts\/1"}],"collection":[{"href":"http:\/\/localhost:8080\/wp-json\/wp\/v2\/posts"}],"about":[{"href":"http:\/\/localhost:8080\/wp-json\/wp\/v2\/types\/post"}],"author":[{"embeddable":true,"href":"http:\/\/localhost:8080\/wp-json\/wp\/v2\/users\/1"}],"replies":[{"embeddable":true,"href":"http:\/\/localhost:8080\/wp-json\/wp\/v2\/comments?post=1"}],"version-history":[{"href":"http:\/\/localhost:8080\/wp-json\/wp\/v2\/posts\/1\/revisions"}],"https:\/\/api.w.org\/featuredmedia":[{"embeddable":true,"href":"http:\/\/localhost:8080\/wp-json\/wp\/v2\/media\/203"}],"https:\/\/api.w.org\/attachment":[{"href":"http:\/\/localhost:8080\/wp-json\/wp\/v2\/media?parent=1"}],"https:\/\/api.w.org\/term":[{"taxonomy":"category","embeddable":true,"href":"http:\/\/localhost:8080\/wp-json\/wp\/v2\/categories?post=1"},{"taxonomy":"post_tag","embeddable":true,"href":"http:\/\/localhost:8080\/wp-json\/wp\/v2\/tags?post=1"},{"taxonomy":"custom_taxonomy","embeddable":true,"href":"http:\/\/localhost:8080\/wp-json\/wp\/v2\/custom_taxonomy?post=1"}],"https:\/\/api.w.org\/meta":[{"embeddable":true,"href":"http:\/\/localhost:8080\/wp-json\/wp\/v2\/posts\/1\/meta"}]}}]}}]'
+    http_version: 
+  recorded_at: Wed, 09 Mar 2016 18:22:11 GMT
 recorded_with: VCR 3.0.1

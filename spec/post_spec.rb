@@ -29,16 +29,30 @@ RSpec.describe WpApiClient::Entities::Post do
 
   describe "meta function" do
 
+    before :all do
+      WpApiClient.reset!
+      oauth_credentials = JSON.parse(File.read('config/oauth.json'), symbolize_names: true)
+
+      WpApiClient.configure do |api_client|
+        api_client.oauth_credentials = oauth_credentials
+      end
+      @api = WpApiClient.get_client
+    end
+
+    after :all do
+      WpApiClient.reset!
+    end
+
     it "returns an individual meta value" do
-      VCR.use_cassette('single_post', record: :new_episodes) do
-        @post = @api.get("posts/1")
+      VCR.use_cassette('single_post_auth', record: :new_episodes) do
+        @post = WpApiClient.get_client.get("posts/1")
         expect(@post.meta(:example_metadata_field)).to eq "example_meta_value"
       end
     end
 
     it "caches" do
-      VCR.use_cassette('single_post', record: :new_episodes) do
-        @post = @api.get("posts/1")
+      VCR.use_cassette('single_post_auth', record: :new_episodes) do
+        @post = WpApiClient.get_client.get("posts/1")
         meta_value = @post.meta(:example_metadata_field)
       end
       VCR.turned_off do
@@ -50,8 +64,8 @@ RSpec.describe WpApiClient::Entities::Post do
     end
 
     it "returns the right items from cache" do
-      VCR.use_cassette('single_post', record: :new_episodes) do
-        @post = @api.get("posts/1")
+      VCR.use_cassette('single_post_auth', record: :new_episodes) do
+        @post = WpApiClient.get_client.get("posts/1")
         expect(@post.meta(:example_metadata_field)).to eq "example_meta_value"
         expect(@post.meta(:example_associated_post_id)).to eq "100"
       end

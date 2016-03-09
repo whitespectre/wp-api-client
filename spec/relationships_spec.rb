@@ -38,9 +38,10 @@ RSpec.describe WpApiClient::Relationship do
     end
   end
 
-  describe "relationships with metadata", vcr: {cassette_name: 'single_post', record: :new_episodes} do
+  describe "relationships with metadata", vcr: {cassette_name: 'single_post_auth', record: :new_episodes} do
     before :each do
       # we need oAuth for this
+      WpApiClient.reset!
       oauth_credentials = JSON.parse(File.read('config/oauth.json'), symbolize_names: true)
       WpApiClient.configure do |api_client|
         api_client.oauth_credentials = oauth_credentials
