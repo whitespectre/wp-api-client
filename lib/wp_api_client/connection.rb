@@ -32,6 +32,10 @@ module WpApiClient
           faraday.use :http_cache, store: configuration.cache, shared_cache: false
         end
 
+        if configuration.proxy
+          faraday.proxy configuration.proxy
+        end
+
         faraday.use Faraday::Response::RaiseError
         faraday.response :json, :content_type => /\bjson$/
         faraday.adapter  :typhoeus

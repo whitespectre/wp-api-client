@@ -66,6 +66,14 @@ RSpec.describe WpApiClient::Configuration do
       post = WpApiClient.get_client.get('posts/1')
       expect { post.relations("http://my.own/mapping") }.not_to raise_error
     end
+
+    it "exposes a #proxy configuration option" do
+      WpApiClient.configure do |api_client|
+        api_client.proxy = "http://localhost:8080"
+      end
+
+      expect(WpApiClient.configuration.proxy).to eq "http://localhost:8080"
+    end
   end
 
 private
