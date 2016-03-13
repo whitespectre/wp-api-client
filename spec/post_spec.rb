@@ -25,6 +25,10 @@ RSpec.describe WpApiClient::Entities::Post do
       expect(@post.slug).to eq 'hello-world'
     end
 
+    it "allows its internal resource to be queried directly" do
+      expect(@post.resource["slug"]).to eq 'hello-world'
+    end
+
   end
 
   describe "meta function" do

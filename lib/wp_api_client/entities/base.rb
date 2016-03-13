@@ -1,4 +1,5 @@
 require 'open-uri'
+require 'ostruct'
 
 module WpApiClient
   module Entities
@@ -12,10 +13,10 @@ module WpApiClient
       end
 
       def initialize(resource)
-        unless resource.is_a? Hash
+        unless resource.is_a? Hash or resource.is_a? OpenStruct
           raise ArgumentError.new('Tried to initialize a WP-API resource with something other than a Hash')
         end
-        @resource = resource
+        @resource = OpenStruct.new(resource)
       end
 
       def links
@@ -30,6 +31,10 @@ module WpApiClient
         else
           relations
         end
+      end
+
+      def method_missing(method, *args)
+        @resource.send(method, *args)
       end
     end
   end
