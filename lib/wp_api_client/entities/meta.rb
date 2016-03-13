@@ -7,13 +7,6 @@ module WpApiClient
         json["key"] and json["value"]
       end
 
-      def key
-        meta["key"]
-      end
-
-      def value
-        meta["value"]
-      end
     end
   end
 end

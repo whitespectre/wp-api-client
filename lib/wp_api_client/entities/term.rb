@@ -15,18 +15,6 @@ module WpApiClient
         relations("http://api.w.org/v2/post_type", post_type)
       end
 
-      def name
-        term["name"]
-      end
-
-      def slug
-        term["slug"]
-      end
-
-      def id
-        term["id"]
-      end
-
     end
   end
 end

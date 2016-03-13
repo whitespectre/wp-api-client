@@ -11,10 +11,6 @@ module WpApiClient
         post["title"]["rendered"]
       end
 
-      def slug
-        post["slug"]
-      end
-
       def date
         Time.parse(post["date_gmt"]) if post["date_gmt"]
       end
@@ -25,10 +21,6 @@ module WpApiClient
 
       def excerpt
         post["excerpt"]["rendered"]
-      end
-
-      def id
-        post["id"]
       end
 
       def terms(taxonomy = nil)
