@@ -13,11 +13,11 @@ RSpec.describe WpApiClient::Configuration do
         imaginary_api_location = "http://example.com/wp-json/wp/v2"
 
         # get an example API response and mock it
-        resp = YAML.load(File.read 'spec/cassettes/custom_post_type_collection.yml')['http_interactions'][0]['response']['body']['string']
+
         ::WebMock.stub_request(:get,
           imaginary_api_location + "/custom_post_type?_embed=true"
         ).to_return(
-          body: resp,
+          body: example_response,
           headers: {'Content-Type' => 'application/json'}
         )
 
@@ -37,11 +37,10 @@ RSpec.describe WpApiClient::Configuration do
         end
 
         # get an example API response and mock it
-        resp = YAML.load(File.read 'spec/cassettes/single_post.yml')['http_interactions'][0]['response']['body']['string']
         ::WebMock.stub_request(:get,
           WpApiClient.configuration.endpoint + "/posts/1"
         ).to_return(
-          body: resp,
+          body: example_response,
           headers: {'Content-Type' => 'application/json'}
         )
 
@@ -67,6 +66,20 @@ RSpec.describe WpApiClient::Configuration do
       post = WpApiClient.get_client.get('posts/1')
       expect { post.relations("http://my.own/mapping") }.not_to raise_error
     end
+
+    it "exposes a #proxy configuration option" do
+      WpApiClient.configure do |api_client|
+        api_client.proxy = "http://localhost:8080"
+      end
+
+      expect(WpApiClient.configuration.proxy).to eq "http://localhost:8080"
+    end
+  end
+
+private
+
+  def example_response
+    YAML.load(File.read 'spec/cassettes/custom_post_type_collection.yml')['http_interactions'][0]['response']['body']['string']
   end
 
 
