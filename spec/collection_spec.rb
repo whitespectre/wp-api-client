@@ -31,5 +31,11 @@ RSpec.describe WpApiClient::Collection do
         WpApiClient::Collection.new(single_post.resource)
       }.not_to raise_error
     end
+
+    it "responds to array methods" do
+      expect(@collection.count).to eq 10
+      @collection.delete_at(0) # delete_at is Array-only
+      expect(@collection.count).to eq 9
+    end
   end
 end

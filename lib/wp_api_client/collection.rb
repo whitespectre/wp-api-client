@@ -24,7 +24,11 @@ module WpApiClient
     def previous_page
       @links[:prev] && @links[:prev]
     end
-    
+
+    def method_missing(method, *args)
+      @resources.send(method, *args)
+    end
+
 private
 
     # https://www.snip2code.com/Snippet/71914/Parse-link-headers-from-Github-API-in-Ru
