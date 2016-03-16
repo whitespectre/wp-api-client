@@ -37,5 +37,11 @@ RSpec.describe WpApiClient::Collection do
       @collection.delete_at(0) # delete_at is Array-only
       expect(@collection.count).to eq 9
     end
+
+    it "throws an error when it tries to parse an error response" do
+      expect {
+        WpApiClient::Collection.new([{"code"=>"rest_forbidden", "message"=>"You don't have permission to do this.", "data"=>{"status"=>403}}])
+      }.to raise_error
+    end
   end
 end

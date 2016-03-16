@@ -96,22 +96,30 @@ Available mappings are :post, :term, and :meta.}
     def load_relation(relationship, position = nil)
       if objects = @resource.dig("_embedded", relationship)
         location = position ? objects[position] : objects
-        WpApiClient::Collection.new(location)
-      else
-        unless position.nil?
-          location = @resource["_links"].dig(relationship, position.to_i, "href")
-        else
-          if @resource["_links"][relationship].is_a? Array
-            # If the resources are linked severally, crank through and
-            # retrieve them one by one as an array
-            return @resource["_links"][relationship].map { |link| WpApiClient.get_client.get(link["href"]) }
-          else
-            # Otherwise, get the single link to the lot
-            location = @resource["_links"][relationship]["href"]
-          end
+        begin
+          WpApiClient::Collection.new(location)
+        rescue WpApiClient::ErrorResponse
+          load_from_links(relationship, position)
         end
-        WpApiClient.get_client.get(location) if location
+      else
+        load_from_links(relationship, position)
       end
+    end
+
+    def load_from_links(relationship, position = nil)
+      unless position.nil?
+        location = @resource["_links"].dig(relationship, position.to_i, "href")
+      else
+        if @resource["_links"][relationship].is_a? Array
+          # If the resources are linked severally, crank through and
+          # retrieve them one by one as an array
+          return @resource["_links"][relationship].map { |link| WpApiClient.get_client.get(link["href"]) }
+        else
+          # Otherwise, get the single link to the lot
+          location = @resource["_links"][relationship]["href"]
+        end
+      end
+      WpApiClient.get_client.get(location) if location
     end
   end
 end
