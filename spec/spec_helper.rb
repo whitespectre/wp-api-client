@@ -23,6 +23,7 @@
 Dir[File.dirname(__FILE__) + "/support/**/*.rb"].each { |f| require f }
 wp_version = ENV["WP_VERSION"] || "4.4"
 WPAPICLIENT_VCR_PATH = "spec/cassettes/#{wp_version}"
+
 require 'vcr'
 VCR.configure do |c|
   c.cassette_library_dir = WPAPICLIENT_VCR_PATH
