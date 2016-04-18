@@ -20,7 +20,12 @@ module WpApiClient
           "https://api.w.org/items" => :terms,
           "http://api.w.org/v2/post_type" => :post_type,
           "https://api.w.org/meta" => :meta,
-          "https://api.w.org/featuredmedia" => :post
+          "https://api.w.org/featuredmedia" => :post,
+          "wp:term" => :term,
+          "wp:items" => :terms,
+          "wp:post_type" => :post_type,
+          "wp:meta" => :meta,
+          "wp:featuredmedia" => :post
         }
       end
 

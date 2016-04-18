@@ -79,7 +79,7 @@ RSpec.describe WpApiClient::Configuration do
 private
 
   def example_response
-    YAML.load(File.read 'spec/cassettes/custom_post_type_collection.yml')['http_interactions'][0]['response']['body']['string']
+    YAML.load(File.read WPAPICLIENT_VCR_PATH + '/custom_post_type_collection.yml')['http_interactions'][0]['response']['body']['string']
   end
 
 
