@@ -122,5 +122,10 @@ RSpec.configure do |config|
 =end
 end
 
+def get_test_oauth_credentials
+  # These credentials were used to construct the VCR cassettes so they're needed to run the tests
+  JSON.parse(File.read('config/test-oauth-credentials.json'), symbolize_names: true)
+end
+
 require 'wp_api_client'
 require 'json'
