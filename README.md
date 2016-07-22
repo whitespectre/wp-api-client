@@ -8,7 +8,7 @@ It can make concurrent requests.
 
 It does not support comments, users or POST requests.
 
-It requires **Ruby 2.3** and is tested against **WP-API 2.0-beta12**.
+It requires **Ruby 2.3** and is tested against WP 4.4, 4.5 (WP-API 2.0b12) and 4.5.3 (WP-API 2.0b13).
 
 **NB** If you would like to use **2.0beta13** and up _and_ access post metadata,
 read the _postmeta_ section in _Testing and Compatibility_, below.
