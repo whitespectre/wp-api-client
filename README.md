@@ -10,6 +10,9 @@ It does not support comments, users or POST requests.
 
 It requires **Ruby 2.3** and is tested against **WP-API 2.0-beta12**.
 
+**NB** If you would like to use **2.0beta13** and up _and_ access post metadata,
+read the _postmeta_ section in _Testing and Compatibility_, below.
+
 ## Installation
 
 ```ruby
@@ -185,6 +188,21 @@ running WP-API v2-beta12. It is not tested with other versions.
 If you want to make your own VCR cassettes, use [these scripts](https://github.com/duncanjbrown/WP-REST-Test).
 
 To run the tests, invoke `rspec`.
+
+The repo contains cassettes built from different versions of WP. To run against
+these cassettes specify WP_VERSION at the CLI.
+
+```sh
+WP_VERSION=4.4 rspec
+WP_VERSION=4.5 rspec
+WP_VERSION=4.5.3 rspec
+WP_VERSION=4.5.3_b13 rspec
+```
+
+### Postmeta
+
+Metadata discovery was removed from WP-API in 2.0 beta-13 and you
+need to restore it manually. [More details](https://github.com/WP-API/wp-api-meta-endpoints/issues/12).
 
 ## Structure
 
