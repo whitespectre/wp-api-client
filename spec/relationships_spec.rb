@@ -42,7 +42,7 @@ RSpec.describe WpApiClient::Relationship do
     before :each do
       # we need oAuth for this
       WpApiClient.reset!
-      oauth_credentials = JSON.parse(File.read('config/oauth.json'), symbolize_names: true)
+      oauth_credentials = get_test_oauth_credentials
       WpApiClient.configure do |api_client|
         api_client.oauth_credentials = oauth_credentials
       end

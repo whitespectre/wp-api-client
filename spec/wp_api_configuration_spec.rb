@@ -49,7 +49,7 @@ RSpec.describe WpApiClient::Configuration do
     end
 
     it "can set up OAuth credentials", vcr: {cassette_name: :oauth_test} do
-      oauth_credentials = JSON.parse(File.read('config/oauth.json'), symbolize_names: true)
+      oauth_credentials = get_test_oauth_credentials
 
       WpApiClient.configure do |api_client|
         api_client.oauth_credentials = oauth_credentials
