@@ -135,7 +135,8 @@ Available mappings are :post, :term, and :meta.}
         "https://api.w.org/term" => "wp:term",
         "https://api.w.org/items" => "wp:items",
         "https://api.w.org/meta" => "wp:meta",
-        "https://api.w.org/featuredmedia" => "wp:featuredmedia"
+        "https://api.w.org/featuredmedia" => "wp:featuredmedia",
+        "http://api.w.org/v2/post_type" => "wp:post_type"
       }
       uri_curie_mappings.dig(uri) || uri
     end
