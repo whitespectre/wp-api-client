@@ -6,7 +6,7 @@ It supports authentication via OAuth or Basic Auth.
 
 It can make concurrent requests.
 
-It does not support comments, users or POST requests.
+It does not support update or create actions. Or comments.
 
 It requires **Ruby 2.3** and is tested against WP 4.4, 4.5 (WP-API 2.0b12) and 4.5.3 (WP-API 2.0b13).
 
@@ -49,6 +49,10 @@ posts.map { |p| puts p.title }
 
 term = @posts.first.terms.first
 # => #<WpApiClient::Entities::Term:0x007fed42b3e458 @resource={"id"=>2...
+
+post = @api.get("posts/1")
+author = post.author
+# => #<WpApiClient::Entities::User:0x007fed42b3e458 @resource={"id"=>2...
 ```
 
 #### Navigate between posts, terms and taxonomies
@@ -61,6 +65,20 @@ term.posts
 # => #<WpApiClient::Collection:0x007fd65d07d588 @resources=[#<WpApiClient::Entities::Post...
 
 # term.posts("custom_post_type").first.terms("category").first.taxonomy... etc etc etc
+```
+
+#### Authors
+
+You can access a given post's author via the `author` property.
+
+If you know the ID, you can access a given author's name, avatar etc by querying `users/{id}`.
+
+If you would like to access posts grouped by author, you should approach from the
+`post` end:
+
+```ruby
+@api.get('posts', author: 1)
+# => #<WpApiClient::Collection:0x007fd65d07d588 @resources=[#<WpApiClient::Entities::Post...
 ```
 
 #### Pagination
@@ -139,7 +157,7 @@ queen = king.relations("http://api.myuniqueuri.com/marriage").first
 # => #<WpApiClient::Entities::Post:0x007fed42b3e458 @resource={"id"=>2...
 ```
 
-There is currently support for `:post_type`, `:post`, `:term` and `:meta` (key/value) relations.
+There is currently support for `:post_type`, `:post`, `:term`, `:user` and `:meta` (key/value) relations.
 
 #### Loading a taxonomy via a slug
 
