@@ -81,6 +81,18 @@ page_after_that = @api.get(next_page.next_page)
 # => #<WpApiClient::Collection:0x00bbcafe938827 @resources=[#<WpApiClient::Entities::Post...
 ```
 
+### Relationships
+
+By default the client makes requests with `_embed=true` attached. This means that
+associated objects that permit embedding will appear in the response. For example, if
+you request a post, the post's author will appear in full alongside so you don't
+have to make another request to get it.
+
+The client is intelligent enough to figure out whether it can read the content
+from an embedded response or if another request is necessary. If you do not want to
+request embedded resources by default, you can change `embed` to `false` when you
+configure the client.
+
 #### Defining relationships
 
 The [REST API docs](http://v2.wp-api.org/extending/linking/) invite you to define
