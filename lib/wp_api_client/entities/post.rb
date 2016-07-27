@@ -27,6 +27,10 @@ module WpApiClient
         relations("https://api.w.org/term", taxonomy)
       end
 
+      def author
+        relations("author")
+      end
+
       def meta(key = nil)
         @meta ||= relations("https://api.w.org/meta")
 

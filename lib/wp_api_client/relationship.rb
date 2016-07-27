@@ -25,7 +25,8 @@ module WpApiClient
           "wp:items" => :terms,
           "wp:post_type" => :post_type,
           "wp:meta" => :meta,
-          "wp:featuredmedia" => :post
+          "wp:featuredmedia" => :post,
+          "author" => :user
         }
       end
 
@@ -39,6 +40,10 @@ module WpApiClient
 
       def terms(r)
         r.load_relation(r.relation, 0)
+      end
+
+      def user(r)
+        r.load_relation(r.relation).first
       end
 
       def post_type(r)

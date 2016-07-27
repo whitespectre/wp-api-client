@@ -29,6 +29,10 @@ RSpec.describe WpApiClient::Entities::Post do
       expect(@post.resource["slug"]).to eq 'hello-world'
     end
 
+    it "returns its author" do
+      expect(@post.author).to be_a WpApiClient::Entities::User 
+    end
+
   end
 
   describe "meta function" do

@@ -1,6 +1,7 @@
 module WpApiClient
   module Entities
     Types = [
+      User,
       Image,
       Post,
       Meta,
