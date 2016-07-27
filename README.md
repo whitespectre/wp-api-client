@@ -212,8 +212,7 @@ results
 
 ## Testing and compatibility
 
-This library comes with VCR cassettes recorded against a local WP installation
-running WP-API v2-beta12. It is not tested with other versions.
+This library comes with VCR cassettes recorded against a local WP installation.
 
 If you want to make your own VCR cassettes, use [these scripts](https://github.com/duncanjbrown/WP-REST-Test).
 
