@@ -8,7 +8,13 @@ It can make concurrent requests.
 
 It does not support update or create actions. Or comments.
 
-It requires **Ruby 2.3** and is tested against WP 4.4, 4.5 (WP-API 2.0b12) and 4.5.3 (WP-API 2.0b13).
+It requires **Ruby 2.3** and is tested against the following WordPress
+versions. 
+
+- 4.4 
+- 4.5 (WP-API 2.0b12) 
+- 4.5.3 (WP-API 2.0b13)
+- 4.7
 
 **NB** If you would like to use **2.0beta13** and up _and_ access post metadata,
 read the _postmeta_ section in _Testing and Compatibility_, below.
@@ -224,8 +230,7 @@ these cassettes specify WP_VERSION at the CLI.
 ```sh
 WP_VERSION=4.4 rspec
 WP_VERSION=4.5 rspec
-WP_VERSION=4.5.3 rspec
-WP_VERSION=4.5.3_b13 rspec
+# etc
 ```
 
 ### Postmeta
