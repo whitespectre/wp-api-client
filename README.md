@@ -15,6 +15,7 @@ versions.
 - 4.5 (WP-API 2.0b12) 
 - 4.5.3 (WP-API 2.0b13)
 - 4.7
+- 4.7.2
 
 **NB** If you would like to use **2.0beta13** and up _and_ access post metadata,
 read the _postmeta_ section in _Testing and Compatibility_, below.

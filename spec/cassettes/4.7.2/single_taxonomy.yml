@@ -1,0 +1,109 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://localhost:8080/wp-json/wp/v2/taxonomies/custom_taxonomy?_embed=true
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.11.0
+      Authorization:
+      - OAuth oauth_consumer_key="DJyagPXmjMxO", oauth_nonce="68ac546c874b492bc981c5b3a0c9017f",
+        oauth_signature="cS6t4QSHXRYtc6PTUiac1vuU%2FZY%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1487630289", oauth_token="8w2Q6IJj63OB01FmNlu6WA5A", oauth_version="1.0"
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Host:
+      - localhost:8080
+      Connection:
+      - close
+      X-Powered-By:
+      - PHP/5.6.26
+      Content-Type:
+      - application/json; charset=UTF-8
+      X-Robots-Tag:
+      - noindex
+      Link:
+      - <http://localhost:8080/wp-json/>; rel="https://api.w.org/"
+      X-Content-Type-Options:
+      - nosniff
+      Access-Control-Expose-Headers:
+      - X-WP-Total, X-WP-TotalPages
+      Access-Control-Allow-Headers:
+      - Authorization, Content-Type
+      Expires:
+      - Wed, 11 Jan 1984 05:00:00 GMT
+      Cache-Control:
+      - no-cache, must-revalidate, max-age=0
+      Last-Modified:
+      - ''
+      Allow:
+      - GET
+    body:
+      encoding: UTF-8
+      string: '{"name":"Custom taxonomy","slug":"custom_taxonomy","description":"","types":["custom_post_type","post"],"hierarchical":false,"rest_base":"custom_taxonomy","_links":{"collection":[{"href":"http:\/\/localhost:8080\/wp-json\/wp\/v2\/taxonomies"}],"wp:items":[{"href":"http:\/\/localhost:8080\/wp-json\/wp\/v2\/custom_taxonomy"}],"curies":[{"name":"wp","href":"https:\/\/api.w.org\/{rel}","templated":true}]}}'
+    http_version: 
+  recorded_at: Mon, 20 Feb 2017 22:38:09 GMT
+- request:
+    method: get
+    uri: http://localhost:8080/wp-json/wp/v2/custom_taxonomy?_embed=true
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.11.0
+      Authorization:
+      - OAuth oauth_consumer_key="DJyagPXmjMxO", oauth_nonce="d2f5bca200ba2d22a4950d9577ea93bf",
+        oauth_signature="Tf%2FaP9LGhTS5wWhZSlDIO3F7rNk%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1487630289", oauth_token="8w2Q6IJj63OB01FmNlu6WA5A", oauth_version="1.0"
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Host:
+      - localhost:8080
+      Connection:
+      - close
+      X-Powered-By:
+      - PHP/5.6.26
+      Content-Type:
+      - application/json; charset=UTF-8
+      X-Robots-Tag:
+      - noindex
+      Link:
+      - <http://localhost:8080/wp-json/>; rel="https://api.w.org/"
+      X-Content-Type-Options:
+      - nosniff
+      Access-Control-Expose-Headers:
+      - X-WP-Total, X-WP-TotalPages
+      Access-Control-Allow-Headers:
+      - Authorization, Content-Type
+      Expires:
+      - Wed, 11 Jan 1984 05:00:00 GMT
+      Cache-Control:
+      - no-cache, must-revalidate, max-age=0
+      Last-Modified:
+      - ''
+      X-Wp-Total:
+      - '2'
+      X-Wp-Totalpages:
+      - '1'
+      Allow:
+      - GET, POST
+    body:
+      encoding: UTF-8
+      string: '[{"id":2,"count":20,"description":"","link":"http:\/\/localhost:8080\/custom_taxonomy\/term_one\/","name":"term_one","slug":"term_one","taxonomy":"custom_taxonomy","meta":[],"_links":{"self":[{"href":"http:\/\/localhost:8080\/wp-json\/wp\/v2\/custom_taxonomy\/2"}],"collection":[{"href":"http:\/\/localhost:8080\/wp-json\/wp\/v2\/custom_taxonomy"}],"about":[{"href":"http:\/\/localhost:8080\/wp-json\/wp\/v2\/taxonomies\/custom_taxonomy"}],"wp:post_type":[{"href":"http:\/\/localhost:8080\/wp-json\/wp\/v2\/custom_post_type?custom_taxonomy=2"},{"href":"http:\/\/localhost:8080\/wp-json\/wp\/v2\/posts?custom_taxonomy=2"}],"curies":[{"name":"wp","href":"https:\/\/api.w.org\/{rel}","templated":true}]}},{"id":3,"count":10,"description":"","link":"http:\/\/localhost:8080\/custom_taxonomy\/term_two\/","name":"term_two","slug":"term_two","taxonomy":"custom_taxonomy","meta":[],"_links":{"self":[{"href":"http:\/\/localhost:8080\/wp-json\/wp\/v2\/custom_taxonomy\/3"}],"collection":[{"href":"http:\/\/localhost:8080\/wp-json\/wp\/v2\/custom_taxonomy"}],"about":[{"href":"http:\/\/localhost:8080\/wp-json\/wp\/v2\/taxonomies\/custom_taxonomy"}],"wp:post_type":[{"href":"http:\/\/localhost:8080\/wp-json\/wp\/v2\/custom_post_type?custom_taxonomy=3"},{"href":"http:\/\/localhost:8080\/wp-json\/wp\/v2\/posts?custom_taxonomy=3"}],"curies":[{"name":"wp","href":"https:\/\/api.w.org\/{rel}","templated":true}]}}]'
+    http_version: 
+  recorded_at: Mon, 20 Feb 2017 22:38:10 GMT
+recorded_with: VCR 3.0.3
