@@ -1,4 +1,12 @@
-# A read-only Ruby client for WP-API v2
+# 🚨 This gem is unmaintained!
+
+_11 Feb 2021_
+
+I don't work with WordPress any more. If you would like to take over maintenance, please open an issue!
+
+
+
+## A read-only Ruby client for WP-API v2
 
 This unambitious client provides read-only access for WP-API v2.
 
